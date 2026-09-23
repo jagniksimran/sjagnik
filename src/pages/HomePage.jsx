@@ -12,6 +12,7 @@ const projects = [
     description:
       'The Entropy website is a cornerstone project developed to showcase the work of the graduating Design and Technology Class of 2023 at Parsons School of Design.',
     link: '#',
+    image: assets.entropydesign,
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const projects = [
     description:
       'MealForge is your kitchen co-pilot to conquer mealtime challenges by organizing meal schedules within your household.',
     link: '#',
+    image: assets.mealForgeHero,
   },
   {
     id: 3,
@@ -28,6 +30,7 @@ const projects = [
     description:
       "Learner's Jam is an application focused on empowering your self-learning journey through curated learning pathways with community support.",
     link: '#',
+    image: assets.learnerJamHero,
   },
   {
     id: 4,
@@ -52,6 +55,7 @@ const otherItems = [
     description:
       'IBM Quantum Jam presents "Quantum Poetics," an art installation that blends the concept of quantum superposition with poetry. Exhibited at Microscopic Gallery, Chelsea, NY.',
     link: '#',
+    image: assets.quantumjam,
   },
   {
     id: 2,
@@ -66,6 +70,7 @@ const otherItems = [
     description:
       'XR Guild is an association of professionals in XR, Metaverse & Spatial Computing. Pecha-Kucha format: 20 slides x 20 minutes.',
     link: '#',
+    image: assets.speaker,
   },
 ];
 
@@ -90,7 +95,12 @@ function HomePage() {
   return (
     <div className="home-page">
       {/* Hero + About combined section */}
-      <section className="hero">
+      <section className="hero" style={{ position: 'relative' }}>
+        {assets.heroBackground && (
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden', opacity: 0.2 }}>
+            <img src={assets.heroBackground} alt="Hero Background" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          </div>
+        )}
         <div className="hero-content">
           <p className="hero-greeting">Hey, I'm Simran</p>
           <h1 className="hero-title">
@@ -149,7 +159,11 @@ function HomePage() {
             <RevealSection key={project.id} delay={i * 0.1}>
               <article className="project-card">
                 <div className="project-image">
-                  <div className="project-image-placeholder" />
+                  {project.image ? (
+                    <img src={project.image} alt={project.title} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
+                  ) : (
+                    <div className="project-image-placeholder" />
+                  )}
                 </div>
                 <div className="project-info">
                   <span className="project-category">{project.category}</span>
@@ -193,7 +207,11 @@ function HomePage() {
             <RevealSection key={item.id} delay={i * 0.1}>
               <article className="other-card">
                 <div className="other-card-image">
-                  <div className="other-image-placeholder" />
+                  {item.image ? (
+                    <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 'inherit' }} />
+                  ) : (
+                    <div className="other-image-placeholder" />
+                  )}
                 </div>
                 <div className="other-card-info">
                   <h4 className="other-title">{item.title}</h4>
